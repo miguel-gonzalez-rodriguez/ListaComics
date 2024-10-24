@@ -1,14 +1,18 @@
 package com.cidead.pmdm.listacomics;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,10 +50,17 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView rvComics = findViewById(R.id.rv_comics);
 
         // Opcionalmente podríamos modificar el tipo de LayoutManager
-        rvComics.setLayoutManager(new LinearLayoutManager(this));
+        //rvComics.setLayoutManager(new LinearLayoutManager(this));
+
+        // Usando el GridLayoutManager
+        rvComics.setLayoutManager(new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false));
+
+        // Usando el StaggeredLayoutManager
+        //rvComics.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
 
         // Asignar el adaptador al RecyclerView
         rvComics.setAdapter(comicAdapter);
+
 
     }
 }
