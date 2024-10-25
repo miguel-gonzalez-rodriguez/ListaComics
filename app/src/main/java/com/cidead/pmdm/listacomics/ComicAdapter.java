@@ -82,8 +82,4 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHol
         }
     }
 
-    //Este metodo se utiliza desde la actividad que captura el evento de clic de los items
-    public void setOnClickListener(OnItemClickListener clickListener){
-        this.itemClickListener = clickListener;
-    }
 }
