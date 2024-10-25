@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,6 +53,17 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHol
             imageView = itemView.findViewById(R.id.imageView);
             tv_titulo = itemView.findViewById(R.id.tv_titulo);
             tv_tipo = itemView.findViewById(R.id.tv_tipo);
+
+            // Se añade un listener para cada elemento del RecyclerView
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Lanza un Toast con el nombre del cómic y el tipo
+                    Toast.makeText(view.getContext(),
+                            coleccion.get(getAdapterPosition()).toString(),
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 }
