@@ -5,18 +5,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHolder>{
-    ArrayList<Comic> coleccion;
+    // interfaz para que otra actividad pueda capturar el evento de click
+    public interface OnItemClickListener{
+        public void onClick(View view, int position);
+    }
 
-    public ComicAdapter(ArrayList<Comic> coleccion) {
+    // Datos
+    private ArrayList<Comic> coleccion;
+    // Capturador de eventos de click
+    private OnItemClickListener itemClickListener;
+
+    // Constructor que recibe los datos y el listener
+    public ComicAdapter(ArrayList<Comic> coleccion, OnItemClickListener itemClickListener) {
         this.coleccion = coleccion;
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -43,27 +51,39 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHol
         return coleccion.size();
     }
 
-    public class ComicViewHolder extends RecyclerView.ViewHolder{
+    public class ComicViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imageView;
         TextView tv_titulo;
         TextView tv_tipo;
 
         public ComicViewHolder(@NonNull View itemView) {
             super(itemView);
+            // Para propagar el evento de click a nuestra actividad
+            itemView.setOnClickListener(this);
+
+            // Referencias a los elementos de la vista
             imageView = itemView.findViewById(R.id.imageView);
             tv_titulo = itemView.findViewById(R.id.tv_titulo);
             tv_tipo = itemView.findViewById(R.id.tv_tipo);
 
-            // Se añade un listener para cada elemento del RecyclerView
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //Lanza un Toast con el nombre del cómic y el tipo
-                    Toast.makeText(view.getContext(),
-                            coleccion.get(getAdapterPosition()).toString(),
-                            Toast.LENGTH_SHORT).show();
-                }
-            });
+
         }
+
+        /**
+         * Called when a view has been clicked.
+         * @param v The view that was clicked.
+         *          Propaga el evento hacía fuera, así podemos capturarlo en el punto
+         *          que queramos de nuestra aplicación
+         */
+        @Override
+        public void onClick(View v) {
+            itemClickListener.onClick(v, getAdapterPosition());
+
+        }
+    }
+
+    //Este metodo se utiliza desde la actividad que captura el evento de clic de los items
+    public void setOnClickListener(OnItemClickListener clickListener){
+        this.itemClickListener = clickListener;
     }
 }

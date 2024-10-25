@@ -1,23 +1,23 @@
 package com.cidead.pmdm.listacomics;
 
-import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ComicAdapter.OnItemClickListener {
+    // Hay que almacenarlo como propiedad de la clase si queremos gestionar sus eventos
+    public ArrayList<Comic> comicArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Crear conjunto de datos
-        ArrayList<Comic> comicArrayList = new ArrayList<>(Arrays.asList(new Comic[]{
-                new Comic("Calle Peligro", R.drawable.calle_peligro, Comic.TipoComic.AMERICANO),
+        comicArrayList = new ArrayList<>(Arrays.asList(new Comic("Calle Peligro", R.drawable.calle_peligro, Comic.TipoComic.AMERICANO),
                 new Comic("Criminal", R.drawable.criminal, Comic.TipoComic.AMERICANO),
                 new Comic("Cyberpunk 2077", R.drawable.cyberpunk_2077, Comic.TipoComic.AMERICANO),
                 new Comic("Dragon Ball", R.drawable.dragon_ball, Comic.TipoComic.MANGA),
@@ -40,11 +39,12 @@ public class MainActivity extends AppCompatActivity {
                 new Comic("Maldito Karma", R.drawable.maldito_karma, Comic.TipoComic.EUROPEO),
                 new Comic("Berserk", R.drawable.berserk, Comic.TipoComic.MANGA),
                 new Comic("Bleach", R.drawable.bleach, Comic.TipoComic.MANGA),
-                new Comic("Frieren", R.drawable.frieren, Comic.TipoComic.MANGA)
-        }));
+                new Comic("Frieren", R.drawable.frieren, Comic.TipoComic.MANGA)));
 
         // Crear el adaptador
-        ComicAdapter comicAdapter = new ComicAdapter(comicArrayList);
+        // Establecemos el capturador de eventos de pulsaciones de elementos,
+        // en este caso somos nosotros mismos. Es el método onClick
+        ComicAdapter comicAdapter = new ComicAdapter(comicArrayList,this);
 
         // Instanciar el RecyclerView
         RecyclerView rvComics = findViewById(R.id.rv_comics);
@@ -61,6 +61,13 @@ public class MainActivity extends AppCompatActivity {
         // Asignar el adaptador al RecyclerView
         rvComics.setAdapter(comicAdapter);
 
+    }
+
+    @Override
+    public void onClick(View view, int position) {
+        // Lanza un Toast con los datos del Comic pulsado
+        Comic comic = comicArrayList.get(position);
+        Toast.makeText(this, "PROPAGANDO EVENTO CLICK \n"+ comic.toString(), Toast.LENGTH_SHORT).show();
 
     }
 }
