@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHolder>{
-    // interfaz para que otra actividad pueda capturar el evento de click
+    // Interfaz para que otra actividad pueda capturar el evento de click
     public interface OnItemClickListener{
-        public void onClick(View view, int position);
+        public void onItemClick(View view, int position);
     }
 
     // Datos
@@ -77,7 +77,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHol
          */
         @Override
         public void onClick(View v) {
-            itemClickListener.onClick(v, getAdapterPosition());
+            itemClickListener.onItemClick(v, getAdapterPosition());
 
         }
     }

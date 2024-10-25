@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements ComicAdapter.OnIt
     }
 
     @Override
-    public void onClick(View view, int position) {
+    public void onItemClick(View view, int position) {
         // Lanza un Toast con los datos del Comic pulsado
         Comic comic = comicArrayList.get(position);
         Toast.makeText(this, "PROPAGANDO EVENTO CLICK \n"+ comic.toString(), Toast.LENGTH_SHORT).show();
