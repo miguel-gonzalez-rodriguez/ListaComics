@@ -35,11 +35,18 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHol
         holder.tv_titulo.setText(comic.getTitulo());
         holder.tv_tipo.setText(comic.getTipo().toString());
 
+        // Rellenar el ArrayList cuando estamos en el último elemento
+        if(position == coleccion.size()-1){
+            coleccion.addAll(coleccion);
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return coleccion.size();
+        // Establecer un tamaño extremadamente grande
+        return Integer.MAX_VALUE;
+        //return coleccion.size();
     }
 
     public class ComicViewHolder extends RecyclerView.ViewHolder{

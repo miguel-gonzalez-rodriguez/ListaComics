@@ -1,6 +1,8 @@
 package com.cidead.pmdm.listacomics;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.Layout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,11 +47,42 @@ public class MainActivity extends AppCompatActivity {
         // Instanciar el RecyclerView
         RecyclerView rvComics = findViewById(R.id.rv_comics);
 
+        // Crear el auto-scroll en horizontal
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rvComics.setLayoutManager(linearLayoutManager);
+
         // Opcionalmente podríamos modificar el tipo de LayoutManager
-        rvComics.setLayoutManager(new LinearLayoutManager(this));
+        //rvComics.setLayoutManager(new LinearLayoutManager(this));
+
+
+
 
         // Asignar el adaptador al RecyclerView
         rvComics.setAdapter(comicAdapter);
 
+
+        // código del auto-scroll
+        final int speedScroll = 1000;
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            int count = 0;
+            @Override
+            public void run() {
+                if(count == comicAdapter.getItemCount())
+                    count =0;
+
+                if(count < comicAdapter.getItemCount()){
+                    rvComics.smoothScrollToPosition(++count);
+                    handler.postDelayed(this,speedScroll);
+                }
+            }
+        };
+        handler.postDelayed(runnable,speedScroll);
+
+
     }
+
+
+
 }
