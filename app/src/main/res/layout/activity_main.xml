@@ -14,10 +14,12 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/app_name" />
+        app:title="@string/app_name"
+        tools:visibility="invisible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_comics"
