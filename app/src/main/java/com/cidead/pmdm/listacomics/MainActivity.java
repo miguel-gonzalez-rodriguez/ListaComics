@@ -13,6 +13,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -65,5 +68,17 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"Acción",Toast.LENGTH_SHORT).show();
             }
         });
+
+        // Añadir el botón flotante
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Acción al pulsar el fab
+                Toast.makeText(MainActivity.this,"FAB pulsado",Toast.LENGTH_SHORT).show();
+
+        }
+        });
+
     }
 }
