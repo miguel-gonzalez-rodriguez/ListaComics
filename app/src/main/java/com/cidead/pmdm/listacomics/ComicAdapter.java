@@ -52,6 +52,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHol
             imageView = itemView.findViewById(R.id.imageView);
             tv_titulo = itemView.findViewById(R.id.tv_titulo);
             tv_tipo = itemView.findViewById(R.id.tv_tipo);
+
         }
     }
 }
