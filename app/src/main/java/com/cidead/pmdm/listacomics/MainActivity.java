@@ -13,6 +13,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -65,5 +67,29 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"Acción",Toast.LENGTH_SHORT).show();
             }
         });
+
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.main), "Mensaje de prueba", Snackbar.LENGTH_LONG);
+        snackbar.setAction("Deshacer", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Acción al hacer clic en "Deshacer"
+                Toast.makeText(getApplicationContext(), "Acción deshecha", Toast.LENGTH_SHORT).show();
+            }
+        });
+        snackbar.addCallback(new Snackbar.Callback() {
+             @Override
+             public void onShown(Snackbar sb) {
+                 // Acción al mostrar la Snackbar
+                 System.out.println("Snackbar mostrada");
+             }
+
+             @Override
+             public void onDismissed(Snackbar transientBottomBar, int event) {
+                 // Acción al cerrar la Snackbar
+                 System.out.println("Snackbar cerrada");
+             }
+         }
+         );
+        snackbar.show();
+        }
     }
-}
