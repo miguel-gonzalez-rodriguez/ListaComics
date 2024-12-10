@@ -39,17 +39,29 @@ public class MainActivity extends AppCompatActivity {
                 new Comic("Frieren", R.drawable.frieren, Comic.TipoComic.MANGA)
         }));
 
-        // Crear el adaptador
-        ComicAdapter comicAdapter = new ComicAdapter(comicArrayList);
+        // Crear el fragmento y pasar el conjunto de datos
+//        FragmentoLista fragmentoLista = new FragmentoLista(comicArrayList);
+//        getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainerView, fragmentoLista).commit();
 
-        // Instanciar el RecyclerView
-        RecyclerView rvComics = findViewById(R.id.rv_comics);
-
-        // Opcionalmente podríamos modificar el tipo de LayoutManager
-        rvComics.setLayoutManager(new LinearLayoutManager(this));
-
-        // Asignar el adaptador al RecyclerView
-        rvComics.setAdapter(comicAdapter);
+        // Segunda opción
+        // Crear el fragmento y pasar el conjunto de datos
+        FragmentoLista fragmentoLista2 = new FragmentoLista();
+        Bundle datos = new Bundle();
+        datos.putParcelableArrayList("datos", comicArrayList);
+        fragmentoLista2.setArguments(datos);
+        getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainerView, fragmentoLista2).commit();
+//
+//        // Crear el adaptador
+//        ComicAdapter comicAdapter = new ComicAdapter(comicArrayList);
+//
+//        // Instanciar el RecyclerView
+//        RecyclerView rvComics = findViewById(R.id.rv_comics);
+//
+//        // Opcionalmente podríamos modificar el tipo de LayoutManager
+//        rvComics.setLayoutManager(new LinearLayoutManager(this));
+//
+//        // Asignar el adaptador al RecyclerView
+//        rvComics.setAdapter(comicAdapter);
 
     }
 }
