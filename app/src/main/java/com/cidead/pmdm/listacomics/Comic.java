@@ -6,9 +6,13 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class Comic implements Parcelable {
+
     private String titulo;
     private int imagen; // Ruta o URL de la imagen
     private TipoComic tipo;
+
+    protected Comic() {
+    }
 
     protected Comic(Parcel in) {
         titulo = in.readString();

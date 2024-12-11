@@ -34,9 +34,9 @@ public class FragmentoLista extends Fragment {
             // Comprobamos si los datos se han pasado en un bundel
             if (getArguments() != null) {
                 this.comicArrayList = getArguments().getParcelableArrayList("datos");
+                System.out.println("Datos en OnCreate..… " + this.comicArrayList);
             }
         }
-
 
     }
 
@@ -46,8 +46,17 @@ public class FragmentoLista extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fragmento_lista, container, false);
         RecyclerView rvComics = view.findViewById(R.id.rv_comics);
 
+        if (this.comicArrayList == null){
+            // Comprobamos si los datos se han pasado en un bundel
+            if (getArguments() != null) {
+                this.comicArrayList = getArguments().getParcelableArrayList("datos");
+                System.out.println("Datos en OnCreateView..… " + this.comicArrayList);
+            }
+        }
+
+        System.out.println("Datos en OnCreateView 2..… " + this.comicArrayList);
         // Crear el adaptador
-        ComicAdapter comicAdapter = new ComicAdapter(comicArrayList);
+        ComicAdapter comicAdapter = new ComicAdapter(this.comicArrayList);
         // Asignar el adaptador al RecyclerView
         rvComics.setAdapter(comicAdapter);
         // Opcionalmente podríamos modificar el tipo de LayoutManager
