@@ -39,6 +39,9 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ComicViewHol
 
     @Override
     public int getItemCount() {
+        // Hay que comprobar que los datos no son nulos
+        if(coleccion == null)
+            return 0;
         return coleccion.size();
     }
 
