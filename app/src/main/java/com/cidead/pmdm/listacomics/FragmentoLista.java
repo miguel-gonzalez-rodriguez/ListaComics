@@ -19,13 +19,6 @@ public class FragmentoLista extends Fragment {
         // Required empty public constructor
     }
 
-    // PRIMERA MANERA TENER LOS DATOS DEL ARRAYLIST
-    // Constructor de fragmento en el que se pasa el conjunto de datos
-    public FragmentoLista(ArrayList<Comic> comicArrayList) {
-        this.comicArrayList = comicArrayList;
-    }
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,11 +26,11 @@ public class FragmentoLista extends Fragment {
         if (this.comicArrayList == null){
             // Comprobamos si los datos se han pasado en un bundel
             if (getArguments() != null) {
+                // añadimos los datos del Bundle a la lista de la clase FragmentoLista
                 this.comicArrayList = getArguments().getParcelableArrayList("datos");
                 System.out.println("Datos en OnCreate..… " + this.comicArrayList);
             }
         }
-
     }
 
     @Override
@@ -46,15 +39,16 @@ public class FragmentoLista extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fragmento_lista, container, false);
         RecyclerView rvComics = view.findViewById(R.id.rv_comics);
 
+        // Esta comprobación puede ser redundante dependiento de dónde se use el fragmento
+        // (como en este ejemplo)
         if (this.comicArrayList == null){
-            // Comprobamos si los datos se han pasado en un bundel
+            // Comprobamos si los datos se han pasado en un bundle
             if (getArguments() != null) {
                 this.comicArrayList = getArguments().getParcelableArrayList("datos");
                 System.out.println("Datos en OnCreateView..… " + this.comicArrayList);
             }
         }
 
-        System.out.println("Datos en OnCreateView 2..… " + this.comicArrayList);
         // Crear el adaptador
         ComicAdapter comicAdapter = new ComicAdapter(this.comicArrayList);
         // Asignar el adaptador al RecyclerView
